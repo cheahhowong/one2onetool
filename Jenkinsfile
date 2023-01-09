@@ -14,7 +14,6 @@ pipeline {
         registryCredential = "admin-user"
     }
 
-
     stages {
         stage('Staging Branch Deploy Code') {
             when {
@@ -23,6 +22,28 @@ pipeline {
             steps {
                 script {
                     echo "Deploying Code from Staging branch"
+                }
+            }
+        }
+
+        stage('Release Branch Deploy Code') {
+            when {
+                branch 'release'
+            }
+            steps {
+                script {
+                    echo "Deploying Code from Release branch"
+                }
+            }
+        }
+
+        stage('Release Master Deploy Code') {
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    echo "Deploying Code from Master branch"
                 }
             }
         }
