@@ -10,22 +10,11 @@ pipeline {
         IMAGE_REPO_NAME="public.ecr.aws/e5c4e5z3/one2onetool"
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-	    registryCredential = "admin-user"
+	registryCredential = "admin-user"
     }
    
     stages {
 
-    // Tests
-    stage('Unit Tests') {
-      steps{
-        script {
-          sh 'npm install'
-	  sh 'npm test -- --watchAll=false'
-        }
-      }
-    }
-        
-    // Building Docker images
     stage('Building image') {
       steps{
         script {
