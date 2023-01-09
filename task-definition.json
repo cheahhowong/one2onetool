@@ -14,7 +14,8 @@
             ],
 	    "environment": [
                 {
-                    "DATA_FILE": "Questions-test.json"
+		    "name": "DATA_FILE",
+		    "value": "Questions-test.json"
                 }
             ]
         }
