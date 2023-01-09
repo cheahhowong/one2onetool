@@ -15,37 +15,38 @@ pipeline {
 
     stages {
         stage('Staging Branch Deploy Code') {
-        when {
-            branch 'staging'
-        }
-
-        stages {
-            // Building Docker images
-            stage('Building image') {
-                steps{
-                    script {
-                        dockerImage = docker.build "${IMAGE_REPO_NAME}:staging-${IMAGE_TAG}"
-                    }
-                }
+            when {
+                branch 'staging'
             }
 
-            // Uploading Docker images into AWS ECR
-            stage('Pushing to ECR') {
-                steps{
-                    script {
-                        docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
-                            dockerImage.push()
+            stages {
+                // Building Docker images
+                stage('Building image') {
+                    steps{
+                        script {
+                            dockerImage = docker.build "${IMAGE_REPO_NAME}:staging-${IMAGE_TAG}"
                         }
                     }
                 }
-            }
 
-            stage('Deploy') {
-                steps{
-                    withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
+                // Uploading Docker images into AWS ECR
+                stage('Pushing to ECR') {
+                    steps{
                         script {
-                            sh "chmod +x -R ${env.WORKSPACE}"
-                            sh './script.sh'
+                            docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
+                                dockerImage.push()
+                            }
+                        }
+                    }
+                }
+
+                stage('Deploy') {
+                    steps{
+                        withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
+                            script {
+                                sh "chmod +x -R ${env.WORKSPACE}"
+                                sh './script.sh'
+                            }
                         }
                     }
                 }
@@ -53,41 +54,40 @@ pipeline {
         }
     }
     
-    
-
     stages {
         stage('Release Branch Deploy Code') {
-        when {
-            branch 'release'
-        }
-
-        stages {
-            // Building Docker images
-            stage('Building image') {
-                steps{
-                    script {
-                        dockerImage = docker.build "${IMAGE_REPO_NAME}:release-${IMAGE_TAG}"
-                    }
-                }
+            when {
+                branch 'release'
             }
 
-            // Uploading Docker images into AWS ECR
-            stage('Pushing to ECR') {
-                steps{
-                    script {
-                        docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
-                            dockerImage.push()
+            stages {
+                // Building Docker images
+                stage('Building image') {
+                    steps{
+                        script {
+                            dockerImage = docker.build "${IMAGE_REPO_NAME}:release-${IMAGE_TAG}"
                         }
                     }
                 }
-            }
 
-            stage('Deploy') {
-                steps{
-                    withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
+                // Uploading Docker images into AWS ECR
+                stage('Pushing to ECR') {
+                    steps{
                         script {
-                            sh "chmod +x -R ${env.WORKSPACE}"
-                            sh './script.sh'
+                            docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
+                                dockerImage.push()
+                            }
+                        }
+                    }
+                }
+
+                stage('Deploy') {
+                    steps{
+                        withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
+                            script {
+                                sh "chmod +x -R ${env.WORKSPACE}"
+                                sh './script.sh'
+                            }
                         }
                     }
                 }
