@@ -10,7 +10,7 @@ pipeline {
         IMAGE_REPO_NAME="one2onetool"
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        CURRENT_BRANCH="${env.BRANCH_NAME}"
+        BRANCH_NAME="${env.BRANCH_NAME}"
         registryCredential = "admin-user"
     }
 
@@ -30,7 +30,7 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    dockerImage = docker.build "${IMAGE_REPO_NAME}:$(CURRENT_BRANCH)-${IMAGE_TAG}"
+                    dockerImage = docker.build "${IMAGE_REPO_NAME}:${BRANCH_NAME}${IMAGE_TAG}"
                 }
             }
         }
