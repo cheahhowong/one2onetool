@@ -15,6 +15,8 @@ pipeline {
    
     stages {
 
+
+
     stage('Building image') {
       steps{
         script {
