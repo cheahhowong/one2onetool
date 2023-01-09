@@ -10,7 +10,6 @@ pipeline {
         IMAGE_REPO_NAME="one2onetool"
         IMAGE_TAG="${env.BRANCH_NAME}${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-        BRANCH_NAME="${env.BRANCH_NAME}"
         registryCredential = "admin-user"
     }
 
@@ -77,6 +76,13 @@ pipeline {
                     }
                 }
             }
+        }
+    }
+
+    post {
+        failure {
+            emailext attachLog: true, body: 'Please refer to the attachment for log', subject: '[Jenkins Pipeline] Build Error', to: 'cheahhowong@gmail.com'
+            sh 'echo "This will run only if failed"'
         }
     }
 }
