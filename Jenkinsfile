@@ -14,7 +14,6 @@ pipeline {
     }
 
     stages {
-        xxx
         stage('Staging Branch Deploy Code') {
             when {
                 branch 'staging'
@@ -51,7 +50,7 @@ pipeline {
         // Building Docker images
         stage('Building image') {
             steps{
-                script {
+                script {xxx
                     dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                 }
             }
@@ -87,7 +86,7 @@ pipeline {
         success {
             sh 'echo "This will run only if successful"'
         }
-        failure - Any {
+        failure {
             emailext attachLog: true, body: 'Fail Test', subject: 'Fail Test', to: 'cheahhowong@gmail.com'
             sh 'echo "This will run only if failed"'
         }
