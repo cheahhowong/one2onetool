@@ -50,7 +50,7 @@ pipeline {
         // Building Docker images
         stage('Building image') {
             steps{
-                script {xxxxxxxx
+                script {xx
                     dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                 }
             }
@@ -80,23 +80,9 @@ pipeline {
     }
 
     post {
-        always {
-            sh 'echo "This will always run"'
-        }
-        success {
-            sh 'echo "This will run only if successful"'
-        }
         failure {
-            emailext attachLog: true, body: 'Fail Test', subject: 'Fail Test', to: 'cheahhowong@gmail.com'
+            emailext attachLog: true, body: 'Please refer to the attachment for log', subject: '[Jenkins Pipeline] Build Error', to: 'cheahhowong@gmail.com'
             sh 'echo "This will run only if failed"'
-        }
-        unstable {
-            sh 'echo "This will run only if the run was marked as unstable"'
-        }
-        changed {
-            sh 'echo "This will run only if the state of the Pipeline has changed"'
-            sh 'echo "For example, the Pipeline was previously failing but is now successful"'
-            sh 'echo "... or the other way around :)"'
         }
     }
 }
