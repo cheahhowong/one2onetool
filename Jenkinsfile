@@ -7,7 +7,7 @@ pipeline {
 	SERVICE_NAME="one2onetool-container-service"
 	TASK_DEFINITION_NAME="first-run-task-definition:1"
 	DESIRED_COUNT="1"
-        IMAGE_REPO_NAME="public.ecr.aws/e5c4e5z3/one2onetool"
+        IMAGE_REPO_NAME="one2onetool"
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 	registryCredential = "admin-user"
