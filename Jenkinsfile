@@ -13,7 +13,8 @@ pipeline {
         registryCredential = "admin-user"
     }
 
-    stage('Staging Branch Deploy Code') {
+    stages {
+        stage('Staging Branch Deploy Code') {
         when {
             branch 'staging'
         }
@@ -21,11 +22,11 @@ pipeline {
         stages {
             // Building Docker images
             stage('Building image') {
-            steps{
-                script {
-                    dockerImage = docker.build "${IMAGE_REPO_NAME}:staging-${IMAGE_TAG}"
+                steps{
+                    script {
+                        dockerImage = docker.build "${IMAGE_REPO_NAME}:staging-${IMAGE_TAG}"
+                    }
                 }
-            }
             }
 
             // Uploading Docker images into AWS ECR
@@ -51,8 +52,11 @@ pipeline {
             }
         }
     }
+    
+    
 
-    stage('Release Branch Deploy Code') {
+    stages {
+        stage('Release Branch Deploy Code') {
         when {
             branch 'release'
         }
@@ -60,11 +64,11 @@ pipeline {
         stages {
             // Building Docker images
             stage('Building image') {
-            steps{
-                script {
-                    dockerImage = docker.build "${IMAGE_REPO_NAME}:release-${IMAGE_TAG}"
+                steps{
+                    script {
+                        dockerImage = docker.build "${IMAGE_REPO_NAME}:release-${IMAGE_TAG}"
+                    }
                 }
-            }
             }
 
             // Uploading Docker images into AWS ECR
