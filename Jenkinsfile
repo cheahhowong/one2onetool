@@ -87,7 +87,7 @@ pipeline {
         success {
             sh 'echo "This will run only if successful"'
         }
-        failure {
+        failure - Any {
             emailext attachLog: true, body: 'Fail Test', subject: 'Fail Test', to: 'cheahhowong@gmail.com'
             sh 'echo "This will run only if failed"'
         }
