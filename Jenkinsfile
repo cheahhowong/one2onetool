@@ -10,6 +10,7 @@ pipeline {
         IMAGE_REPO_NAME="one2onetool"
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
+        CURRENT_BRANCH="${env.BRANCH_NAME}"
         registryCredential = "admin-user"
     }
 
@@ -18,77 +19,39 @@ pipeline {
             when {
                 branch 'staging'
             }
-
-            stages {
-                // Building Docker images
-                stage('Building image') {
-                    steps{
-                        script {
-                            dockerImage = docker.build "${IMAGE_REPO_NAME}:staging-${IMAGE_TAG}"
-                        }
-                    }
+            steps {
+                script {
+                    echo "Deploying Code from Staging branch"
                 }
+            }
+        }
 
-                // Uploading Docker images into AWS ECR
-                stage('Pushing to ECR') {
-                    steps{
-                        script {
-                            docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
-                                dockerImage.push()
-                            }
-                        }
-                    }
+        // Building Docker images
+        stage('Building image') {
+            steps{
+                script {
+                    dockerImage = docker.build "${IMAGE_REPO_NAME}:$(CURRENT_BRANCH)-${IMAGE_TAG}"
                 }
+            }
+        }
 
-                stage('Deploy') {
-                    steps{
-                        withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
-                            script {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh './script.sh'
-                            }
-                        }
+        // Uploading Docker images into AWS ECR
+        stage('Pushing to ECR') {
+            steps{
+                script {
+                    docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
+                        dockerImage.push()
                     }
                 }
             }
         }
-    }
-    
-    stages {
-        stage('Release Branch Deploy Code') {
-            when {
-                branch 'release'
-            }
 
-            stages {
-                // Building Docker images
-                stage('Building image') {
-                    steps{
-                        script {
-                            dockerImage = docker.build "${IMAGE_REPO_NAME}:release-${IMAGE_TAG}"
-                        }
-                    }
-                }
-
-                // Uploading Docker images into AWS ECR
-                stage('Pushing to ECR') {
-                    steps{
-                        script {
-                            docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
-                                dockerImage.push()
-                            }
-                        }
-                    }
-                }
-
-                stage('Deploy') {
-                    steps{
-                        withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
-                            script {
-                                sh "chmod +x -R ${env.WORKSPACE}"
-                                sh './script.sh'
-                            }
-                        }
+        stage('Deploy') {
+            steps{
+                withAWS(credentials: registryCredential, region: "${AWS_DEFAULT_REGION}") {
+                    script {
+                        sh "chmod +x -R ${env.WORKSPACE}"
+                        sh './script.sh'
                     }
                 }
             }
