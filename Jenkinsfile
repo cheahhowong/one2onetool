@@ -11,7 +11,6 @@ pipeline {
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
         BRANCH_NAME="${env.BRANCH_NAME}"
-        DATA_FILE="Questions-test.json"
         registryCredential = "admin-user"
     }
 

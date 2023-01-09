@@ -20,5 +20,10 @@
              "FARGATE"
     ],
     "networkMode": "awsvpc",
-    "executionRoleArn": ROLE_ARN 
+    "executionRoleArn": ROLE_ARN, 
+    "environment": [
+       {
+           "DATA_FILE": "Questions-test.json"
+       }
+    ]     
 }
