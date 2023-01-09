@@ -14,6 +14,7 @@ pipeline {
         registryCredential = "admin-user"
     }
 
+
     stages {
         stage('Staging Branch Deploy Code') {
             when {
