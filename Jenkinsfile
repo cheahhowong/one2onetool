@@ -50,7 +50,7 @@ pipeline {
         // Building Docker images
         stage('Building image') {
             steps{
-                script {xxxx
+                script {xxxxx
                     dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
                 }
             }
