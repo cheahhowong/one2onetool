@@ -11,6 +11,11 @@
                     "containerPort": 3000,
                     "hostPort": 3000
                 }
+            ],
+	    "environment": [
+                {
+                    "DATA_FILE": "Questions-test.json"
+                }
             ]
         }
     ],
@@ -20,10 +25,5 @@
              "FARGATE"
     ],
     "networkMode": "awsvpc",
-    "executionRoleArn": ROLE_ARN, 
-    "environment": [
-       {
-           "DATA_FILE": "Questions-test.json"
-       }
-    ]     
+    "executionRoleArn": ROLE_ARN
 }
