@@ -15,6 +15,7 @@ pipeline {
    
     stages {
 
+
     // Building Docker images
     stage('Building image') {
       steps{
