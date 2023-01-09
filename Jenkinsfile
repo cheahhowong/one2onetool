@@ -5,7 +5,7 @@ pipeline {
         AWS_DEFAULT_REGION="ap-southeast-1"
         CLUSTER_NAME="one2onetool-cluster"
 	SERVICE_NAME="one2onetool-container-service"
-	TASK_DEFINITION_NAME="first-run-task-definition:1"
+	TASK_DEFINITION_NAME="first-run-task-definition"
 	DESIRED_COUNT="1"
         IMAGE_REPO_NAME="one2onetool"
         IMAGE_TAG="${env.BUILD_ID}"
