@@ -78,4 +78,11 @@ pipeline {
             }
         }
     }
+
+    post {
+        failure {
+            emailext attachLog: true, body: 'Please refer to the attachment for log', subject: '[Jenkins Pipeline] Build Error', to: 'cheahhowong@gmail.com'
+            sh 'echo "This will run only if failed"'
+        }
+    }
 }
