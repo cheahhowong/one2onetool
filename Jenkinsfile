@@ -22,7 +22,6 @@ pipeline {
             }
             steps {
                 script {
-                    git 'https://github.com/cheahhowong/one2onetool/tree/staging'
                     sh 'npm install'
                     sh 'npm test -- --watchAll=false'
                 }
@@ -35,7 +34,6 @@ pipeline {
             }
             steps {
                 script {
-                    git 'https://github.com/cheahhowong/one2onetool/tree/release'
                     sh 'npm install'
                     sh 'npm test -- --watchAll=false'
                 }
@@ -48,7 +46,6 @@ pipeline {
             }
             steps {
                 script {
-                    git 'https://github.com/cheahhowong/one2onetool/tree/master'
                     sh 'npm install'
                     sh 'npm test -- --watchAll=false'
                 }
