@@ -15,43 +15,40 @@ pipeline {
     }
 
     stages {
-        stage('Staging Branch Deploy Code') {
+        // Unit Tests
+        stage('Staging Branch Unit Test') {
             when {
                 branch 'staging'
             }
             steps {
                 script {
-                    echo "Deploying Code from Staging branch"
+                    git 'https://github.com/cheahhowong/one2onetool/tree/staging'
+                    sh 'npm install'
+                    sh 'npm test -- --watchAll=false'
                 }
             }
         }
 
-        stage('Release Branch Deploy Code') {
+        stage('Release Branch Unit Test') {
             when {
                 branch 'release'
             }
             steps {
                 script {
-                    echo "Deploying Code from Release branch"
+                    git 'https://github.com/cheahhowong/one2onetool/tree/release'
+                    sh 'npm install'
+                    sh 'npm test -- --watchAll=false'
                 }
             }
         }
 
-        stage('Release Master Deploy Code') {
+        stage('Release Master Unit Test') {
             when {
                 branch 'master'
             }
             steps {
                 script {
-                    echo "Deploying Code from Master branch"
-                }
-            }
-        }
-
-        // Tests
-        stage('Unit Tests') {
-            steps{
-                script {
+                    git 'https://github.com/cheahhowong/one2onetool/tree/master'
                     sh 'npm install'
                     sh 'npm test -- --watchAll=false'
                 }
