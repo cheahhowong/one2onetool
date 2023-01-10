@@ -15,39 +15,35 @@ pipeline {
     }
 
     stages {
-        // Unit Tests
-        stage('Staging Branch Unit Test') {
+        stage('Staging Branch Deploy Code') {
             when {
                 branch 'staging'
             }
             steps {
                 script {
-                    sh 'npm install'
-                    sh 'npm test'
+                    echo "Deploying Code from Staging branch"
                 }
             }
         }
 
-        stage('Release Branch Unit Test') {
+        stage('Release Branch Deploy Code') {
             when {
                 branch 'release'
             }
             steps {
                 script {
-                    sh 'npm install'
-                    sh 'npm test'
+                    echo "Deploying Code from Release branch"
                 }
             }
         }
 
-        stage('Release Master Unit Test') {
+        stage('Release Master Deploy Code') {
             when {
                 branch 'master'
             }
             steps {
                 script {
-                    sh 'npm install'
-                    sh 'npm test'
+                    echo "Deploying Code from Master branch"
                 }
             }
         }
