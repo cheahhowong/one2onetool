@@ -44,7 +44,8 @@ git push origin staging
 ```
 1. View the Jenkins [staging branch page](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/staging/) to check if the deployment is success
 2. If success, visit the [Web app](http://ec2co-ecsel-1l9l9yvh54yxb-1768850757.ap-southeast-1.elb.amazonaws.com:3000/) to view the web app.
-3. It will show the questions and category as shown in the diagram
+3. It will show the questions and category as shown in the diagram below
+![Questions-test](/one2onetool/image2.png)
 
 ## To test **release** branch use **Questions.json** as its input data file
 ``` 
@@ -61,6 +62,7 @@ git push origin release
 1. View the Jenkins [release branch page](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/release/) to check if the deployment is success
 2. If success, visit the [Web app](http://ec2co-ecsel-1l9l9yvh54yxb-1768850757.ap-southeast-1.elb.amazonaws.com:3000/) to view the web app.
 3. It will show the questions and category as shown in the diagram
+![Questions-test](/one2onetool/image1.png)
 
 ## To test the pipeline should send stopped and send an email alert
 1. Visit Jenkins [setting](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/manage/configure)
