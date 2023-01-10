@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    tools {nodejs "node"}
     environment {
         AWS_ACCOUNT_ID="939612840870"
         AWS_DEFAULT_REGION="ap-southeast-1"
@@ -43,6 +44,16 @@ pipeline {
             steps {
                 script {
                     echo "Deploying Code from Master branch"
+                }
+            }
+        }
+
+        // Tests
+        stage('Unit Tests') {
+            steps{
+                script {
+                    sh 'npm install'
+                    sh 'npm test -- --watchAll=false'
                 }
             }
         }
