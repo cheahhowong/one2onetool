@@ -62,7 +62,7 @@ git push origin release
 1. View the Jenkins [release branch page](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/release/) to check if the deployment is success
 2. If success, visit the [Web app](http://ec2co-ecsel-1l9l9yvh54yxb-1768850757.ap-southeast-1.elb.amazonaws.com:3000/) to view the web app.
 3. It will show the questions and category as shown in the diagram
-![Questions-test](https://raw.githubusercontent.com/cheahhowong/one2onetool/master/screenshots/image1.png)
+![Questions](https://raw.githubusercontent.com/cheahhowong/one2onetool/master/screenshots/image1.png)
 
 ## To test the pipeline should send stopped and send an email alert
 1. Visit Jenkins [setting](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/manage/configure)
