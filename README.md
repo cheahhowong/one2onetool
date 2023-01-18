@@ -42,7 +42,7 @@ git add .
 git commit -m 'test'
 git push origin staging
 ```
-1. View the Jenkins [staging branch page](ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/staging/) to check if the deployment is success
+1. View the Jenkins [staging branch page](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/staging/) to check if the deployment is success
 2. If success, visit the [Web app](http://ec2co-ecsel-1l9l9yvh54yxb-1768850757.ap-southeast-1.elb.amazonaws.com:3000/) to view the web app.
 3. It will show the questions and category as shown in the diagram below
 ![Questions-test](https://raw.githubusercontent.com/cheahhowong/one2onetool/master/screenshots/image2.png)
