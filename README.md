@@ -25,7 +25,7 @@ git clone git@github.com:cheahhowong/one2onetool.git (for SSH)
 # Jenkins
 
 ## How to use the Jenkins pipeline
-1. Visit [Jenkins](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/) hosted in AWS EC2 instances.
+1. Visit [Jenkins](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/) hosted in AWS EC2 instances. 
 2. Login with credential **Username = admin** & **Password = admin**
 3. Click the Jenkins job with name `one2onetool`
 4. Click either **staging** branch or **release** branch to view the pipeline
@@ -42,7 +42,7 @@ git add .
 git commit -m 'test'
 git push origin staging
 ```
-1. View the Jenkins [staging branch page](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/staging/) to check if the deployment is success
+1. View the Jenkins [staging branch page](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/staging/) to check if the deployment is success
 2. If success, visit the [Web app](http://ec2co-ecsel-1l9l9yvh54yxb-1768850757.ap-southeast-1.elb.amazonaws.com:3000/) to view the web app.
 3. It will show the questions and category as shown in the diagram below
 ![Questions-test](https://raw.githubusercontent.com/cheahhowong/one2onetool/master/screenshots/image2.png)
@@ -59,13 +59,13 @@ git add .
 git commit -m 'test'
 git push origin release
 ```
-1. View the Jenkins [release branch page](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/release/) to check if the deployment is success
+1. View the Jenkins [release branch page](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/release/) to check if the deployment is success
 2. If success, visit the [Web app](http://ec2co-ecsel-1l9l9yvh54yxb-1768850757.ap-southeast-1.elb.amazonaws.com:3000/) to view the web app.
 3. It will show the questions and category as shown in the diagram
 ![Questions](https://raw.githubusercontent.com/cheahhowong/one2onetool/master/screenshots/image1.png)
 
 ## To test the pipeline should send stopped and send an email alert
-1. Visit Jenkins [setting](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/manage/configure)
+1. Visit Jenkins [setting](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/manage/configure)
 2. Scroll to **Extended E-mail Notification** section
 3. Click **Advanced** to expand
 4. Configure **SMTP server** & **SMTP Port** if you are not using gmail
@@ -90,5 +90,5 @@ git commit -m 'test'
 git push origin release
 ```
 
-- The latest build in Jenkins [release branch page](http://ec2-3-1-200-39.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/release/) should show build error
+- The latest build in Jenkins [release branch page](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/job/one2onetool/job/release/) should show build error
 - You should received an email with Subject **[Jenkins Pipeline] Build Error**. The console output log is attached together with the email
