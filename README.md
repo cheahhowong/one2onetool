@@ -25,7 +25,7 @@ git clone git@github.com:cheahhowong/one2onetool.git (for SSH)
 # Jenkins
 
 ## How to use the Jenkins pipeline
-1. Visit [Jenkins](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/) hosted in AWS EC2 instances.
+1. Visit [Jenkins](http://ec2-18-136-100-249.ap-southeast-1.compute.amazonaws.com:8080/) hosted in AWS EC2 instances. 
 2. Login with credential **Username = admin** & **Password = admin**
 3. Click the Jenkins job with name `one2onetool`
 4. Click either **staging** branch or **release** branch to view the pipeline
